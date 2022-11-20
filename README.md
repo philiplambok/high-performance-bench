@@ -49,3 +49,138 @@ $ R=123 make on-roda
 ## Benchmarks Result
 
 ![](result.png)
+
+## Snippets of Code
+
+### Rails API
+
+I'm using Rails API-only code base with a setup connection pool of 148.
+
+```yml
+# database.yml
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: 148
+  # ...
+```
+
+Nothing fancy in `config/routes.rb`:
+
+```rb
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :messages, only: %i[create]
+end
+```
+
+Also, in the controllers:
+
+```rb
+class MessagesController < ApplicationController
+  def create
+    render json: Message.create!(message: 'Hello posting from Rails'), status: :ok
+  end
+end
+```
+
+### Roda API
+
+I'm not familiar with Roda, so I just code to make the API server can receive 10000 requests without breaking.
+
+```rb
+# config.ru
+# ...
+Sequel.single_threaded = true
+DB = Sequel.connect('mysql2://localhost/golang_test?user=root&password=', max_connections: 10)
+
+class App < Roda
+  plugin :json
+
+  route do |r|
+    r.is('messages') do
+      r.post do
+        DB[:messages].insert(message: 'Hello posting from Roda')
+        {message: 'Hello posting from Roda'}
+      end
+    end
+  end
+end
+
+run App
+```
+
+And running it with Puma server. 
+
+```sh
+$ bundle exec puma
+```
+
+Everything is the default, I don't write this in really performance ways, the DB was using the single-threaded, and using the Puma default settings.
+
+
+## Go API
+
+```go
+// main.go
+
+package main
+
+import (
+	"net/http"
+	"time"
+
+	"database/sql"
+
+	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
+)
+
+var db = make(map[string]string)
+
+type Messages struct {
+	ID        uint `gorm:"primaryKey"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	Message   string
+}
+
+func setupRouter() *gin.Engine {
+	r := gin.Default()
+
+	r.POST("/messages", func(c *gin.Context) {
+		db, err := sql.Open("mysql", "root:@/golang_test")
+		if err != nil {
+			panic(err)
+		}
+		// See "Important settings" section.
+		db.SetConnMaxLifetime(time.Minute * 3)
+		db.SetMaxOpenConns(148)
+		db.SetMaxIdleConns(1)
+		defer db.Close()
+
+		// perform a db.Query insert
+		insert, err := db.Query("INSERT INTO `messages` (`message`) VALUES ('Hello posting from Golang')")
+
+		// if there is an error inserting, handle it
+		if err != nil {
+			panic(err.Error())
+		}
+		// be careful deferring Queries if you are using transactions
+		defer insert.Close()
+
+		data := map[string]interface{}{
+			"message": "Hello posting from Golang",
+		}
+		c.JSON(http.StatusOK, data)
+	})
+}
+
+func main() {
+	r := setupRouter()
+	// Listen and Server in 0.0.0.0:8080
+	r.Run(":8080")
+}
+```
+
+Yes, also the same with Roda, everything that I write is only to make the server is not broken when handling 10000 requests almost at the same time.
