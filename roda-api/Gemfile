@@ -1,0 +1,7 @@
+source "https://rubygems.org"
+
+gem "roda"
+gem "puma"
+gem "mysql2"
+gem 'sequel'
+gem 'debug'
