@@ -203,4 +203,12 @@ Averaged 2.4888 ms in 1000 iterations
 Total Time 2.488869 s
 ```
 
-Again, Roda slightly better with 0.091 ms. But in this case, Roda doesn't have any logs, while Go writes something in the log for every requets.  
+Again, Roda is slightly better with 0.091 ms. But in this case, Roda doesn't have any logs, while Go writes something in the log for every requets.
+
+## Opinion 
+
+I can say that Ruby is not a poor-performance programming language. Ruby can be fast, and can even be faster than Go in some cases. Poor performance comes when you use Rails. 
+
+But that not comes without any payback. When developing API-Only in Rails we have [a lot of features](https://guides.rubyonrails.org/api_app.html#why-use-rails-for-json-apis-questionmark) compared to Roda.
+
+In the end, you can take a look at Roda, it's probably a good choice when you care about performance, and still want to use Ruby. 
