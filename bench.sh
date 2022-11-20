@@ -11,5 +11,5 @@ do
 done
 avgtimeMs=$(echo "scale=4; 1000*$totaltime/$iterations" | bc)
 echo "Averaged $avgtimeMs ms in $iterations iterations"
-echo "Total Time $totaltime"
+echo "Total Time $totaltime s"
 

@@ -36,5 +36,9 @@ Running the Roda server (listen at http:9292)
 $ make roda-server
 ```
 
-## Up and Running
+## Some benchmarks
+
+|Stack|Total Request|Average per request|Total time|
+|---|---|---|---|---|
+|Rails API|100||13.6605 ms|1.366055 s|
 

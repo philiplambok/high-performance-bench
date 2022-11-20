@@ -7,3 +7,9 @@ go-server:
 	cd go-api && go run main.go
 roda-server:
 	cd roda-api && bundle exec puma
+bench-rails:
+	sh bench.sh $(R) http://localhost:3000/messages
+bench-go:
+	sh bench.sh $(R) http://localhost:4000/messages
+bench-roda:
+	sh bench.sh $(R) http://localhost:9292/messages
