@@ -10,6 +10,6 @@ roda-server:
 bench-rails:
 	sh bench.sh $(R) http://localhost:3000/messages
 bench-go:
-	sh bench.sh $(R) http://localhost:4000/messages
+	sh bench.sh $(R) http://localhost:8080/messages
 bench-roda:
 	sh bench.sh $(R) http://localhost:9292/messages

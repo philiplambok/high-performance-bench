@@ -24,7 +24,7 @@ Running the Rails server (listen at http:3000)
 $ make rails-server
 ```
 
-Running the Go server (listen at http:4000)
+Running the Go server (listen at http:8080)
 
 ```sh
 $ make go-server
@@ -38,7 +38,9 @@ $ make roda-server
 
 ## Some benchmarks
 
-Stack|Total Request|Average per request|Total time|
+Stack|Total Requests|Average per request|Total time|
 ---------|----------|---------|-------|
 Rails API | 100 | 13.6605 ms|1.366055 s|
+Go API | 100 | 4.3355 ms | .433559 s|
+Roda API | 100 | 3.1006 ms | .310069 s|
 
