@@ -1,0 +1,3 @@
+rails-api/tmp/**
+rails-api/log/*
+rails-api/tmp/*
