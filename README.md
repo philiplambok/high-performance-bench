@@ -184,3 +184,23 @@ func main() {
 ```
 
 Yes, also the same with Roda, everything that I write is only to make the server is not broken when handling 10000 requests almost at the same time.
+
+## Ping Pong
+
+I try to make ping-pong between Roda and Go, so we exclude the MySQL performance, and here's the result:
+
+```sh
+➜  high-performance-bench git:(main) ✗ R=1000 make ping-go
+sh bench.sh 1000 http://localhost:8080/ping
+Running 1000 iterations for curl http://localhost:8080/ping
+Averaged 2.5803 ms in 1000 iterations
+Total Time 2.580399 s
+
+➜  high-performance-bench git:(main) ✗ R=1000 make ping-roda
+sh bench.sh 1000 http://localhost:9292/ping
+Running 1000 iterations for curl http://localhost:9292/ping
+Averaged 2.4888 ms in 1000 iterations
+Total Time 2.488869 s
+```
+
+Again, Roda slightly better with 0.091 ms. But in this case, Roda, don't return anything in the logs, while Go write something in the log in every requets.  

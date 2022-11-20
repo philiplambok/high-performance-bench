@@ -8,8 +8,12 @@ go-server:
 roda-server:
 	cd roda-api && bundle exec puma
 on-rails:
-	sh bench.sh $(R) http://localhost:3000/messages
+	sh bench.sh $(R) -X POST http://localhost:3000/messages
 on-go:
-	sh bench.sh $(R) http://localhost:8080/messages
+	sh bench.sh $(R) -X POST http://localhost:8080/messages
 on-roda:
-	sh bench.sh $(R) http://localhost:9292/messages
+	sh bench.sh $(R) -X POST http://localhost:9292/messages
+ping-roda:
+	sh bench.sh $(R) http://localhost:9292/ping
+ping-go:
+	sh bench.sh $(R) http://localhost:8080/ping
