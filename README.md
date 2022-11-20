@@ -38,7 +38,7 @@ $ make roda-server
 
 ## Some benchmarks
 
-|Stack|Total Request|Average per request|Total time|
-|---|---|---|---|---|
-|Rails API|100||13.6605 ms|1.366055 s|
+Stack|Total Request|Average per request|Total time|
+---------|----------|---------|-------|
+Rails API | 100 | 13.6605 ms|1.366055 s|
 
