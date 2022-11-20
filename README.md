@@ -119,7 +119,7 @@ $ bundle exec puma
 Everything is the default, I don't write this in really performance ways, the DB was using the single-threaded, and using the Puma default settings.
 
 
-## Go API
+### Go API
 
 ```go
 // main.go
