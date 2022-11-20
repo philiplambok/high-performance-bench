@@ -203,4 +203,4 @@ Averaged 2.4888 ms in 1000 iterations
 Total Time 2.488869 s
 ```
 
-Again, Roda slightly better with 0.091 ms. But in this case, Roda, don't return anything in the logs, while Go write something in the log in every requets.  
+Again, Roda slightly better with 0.091 ms. But in this case, Roda doesn't have any logs, while Go writes something in the log for every requets.  
