@@ -5,16 +5,36 @@ Sample scripts to compare speed between stacks.
 Currently covered:
 - Rails 7 (Ruby 3.1.2)
 - Roda (Ruby 3.1.2)
-- Golang API (1.18.4)
+- Go with Gin Framework (Go 1.18.4)
 
 Database:
 - Mysql 14.14
 
-## Installation
+## Setup DB && Running the API servers
 
 Setup the DB with: 
 
 ```sh
 $ make install
 ```
+
+Running the Rails server (listen at http:3000)
+
+```sh
+$ make rails-server
+```
+
+Running the Go server (listen at http:4000)
+
+```sh
+$ make go-server
+```
+
+Running the Roda server (listen at http:9292)
+
+```sh
+$ make roda-server
+```
+
+## Up and Running
 
