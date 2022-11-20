@@ -16,6 +16,10 @@ class App < Roda
         {message: 'success'}
       end
     end
+
+    r.get('ping') do
+      { message: 'pong' }
+    end
   end
 end
 
