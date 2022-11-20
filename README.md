@@ -36,11 +36,20 @@ Running the Roda server (listen at http:9292)
 $ make roda-server
 ```
 
+Running the benchmarks:
+
+```sh
+$ R=123 bench-rails
+$ R=123 bench-go
+$ R=123 bench-roda
+```
+
+`R` is a total request.
+
 ## Some benchmarks
 
-Stack|Total Requests|Average per request|Total time|
+Stack|Total Request|Average per request|Total time|
 ---------|----------|---------|-------|
 Rails API | 100 | 13.6605 ms|1.366055 s|
 Go API | 100 | 4.3355 ms | .433559 s|
 Roda API | 100 | 3.1006 ms | .310069 s|
-
